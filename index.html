@@ -1,27 +1,33 @@
+<!DOCTYPE html>
 <html>
-
 <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, height=device-height, user-scalable=0, shrink-to-fit=yes, minimal-ui">
+  <meta name="description" content="">
   <title>WebP decoding</title>
   <script type="text/javascript">
     const canvas = document.createElement('canvas');
-    const offscreen = canvas.transferControlToOffscreen();
 
-    if ('serviceWorker' in navigator) {
-      void async function install() {
-        await navigator.serviceWorker.register('sw.js');
-        const registration = await navigator.serviceWorker.ready;
-        registration.active.onstatechange = (state) => {
-          for (const img of document.querySelectorAll('img')) {
-            if (img.src.endsWith('.webp')) {
-              img.src = img.src; // reload.
+	if (canvas.transferControlToOffscreen) {
+      const offscreen = canvas.transferControlToOffscreen();
+
+     if ('serviceWorker' in navigator) {
+        void async function install() {
+          await navigator.serviceWorker.register('./build/sw.js');
+          const registration = await navigator.serviceWorker.ready;
+          registration.active.onstatechange = (state) => {
+            for (const img of document.querySelectorAll('img')) {
+              if (img.src.endsWith('.webp')) {
+                img.src = img.src; // reload.
+              }
             }
           }
-        }
-      }();
+        }();
+      }
     }
   </script>
   <script type="module">
-    import { fetchWebPDecoder } from './webp-decoder.js';
+    import { fetchWebPDecoder } from './build/webp-decoder.js';
 
     async function loadImage(filename) {
       const response = await fetch(filename);

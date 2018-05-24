@@ -2,10 +2,7 @@ cmake_minimum_required (VERSION 3.7)
 project(webp_wasm)
 
 SET(CMAKE_BUILD_TYPE_INIT "Release")
-
-if (${CMAKE_SYSTEM_NAME} MATCHES "Emscripten")
-    set(CMAKE_C_COMPILER "emcc")
-endif ()
+set(CMAKE_C_COMPILER "emcc")
 
 file(GLOB SOURCE_FILES 
  *.c
@@ -24,6 +21,6 @@ target_include_directories(webp_wasm PRIVATE
 )
 set_target_properties(webp_wasm PROPERTIES LINK_FLAGS
     "-s WASM=1 \
-    -s EXTRA_EXPORTED_RUNTIME_METHODS='[\"cwrap\", \"getValue\"]' \
+    -s EXTRA_EXPORTED_RUNTIME_METHODS=\"[\\\"cwrap\\\", \\\"getValue\\\"]\" \
     -s ALLOW_MEMORY_GROWTH=1 \
     -I libwebp")
