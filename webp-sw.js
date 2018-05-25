@@ -3,8 +3,8 @@ let _decoderReady = new Promise(async resolve => {
   // const moduleDecl = await import('webp-decoder.js');
   // const imports = await moduleDecl.importWebPDecoder();
 
-  importScripts('webp_wasm.js');
-  importScripts('classic/webp-decoder.js');
+  importScripts('build/webp_wasm.js');
+  importScripts('build/classic/webp-decoder.js');
   resolve(await fetchWebPDecoder());
 });
 

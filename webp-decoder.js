@@ -80,10 +80,10 @@ export async function fetchWebPDecoder() {
     });
 
     if (self && self.document) {
-      await importClassicScript('webp_wasm.js');
+      await importClassicScript('build/webp_wasm.js');
     }
     else if (self && self.importScripts) {
-      /* sync */ importScripts('webp_wasm.js');
+      /* sync */ importScripts('build/webp_wasm.js');
     } else {
       console.warning("Cannot auto import 'webp_wasm.js' from script imported from worker");
     }

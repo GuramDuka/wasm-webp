@@ -4,5 +4,5 @@ const replace = require('gulp-replace');
 gulp.task('compile', function() {
   gulp.src(['webp-decoder.js'])
     .pipe(replace('export', ''))
-    .pipe(gulp.dest('build'));
+    .pipe(gulp.dest('build/classic'));
 });
